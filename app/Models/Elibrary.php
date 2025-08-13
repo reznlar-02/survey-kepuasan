@@ -9,5 +9,13 @@ class Elibrary extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'author', 'category', 'synopsis', 'cover'];
+    protected $table = 'elibrary';
+
+    protected $fillable = [
+        'title',
+        'author',
+        'category',
+        'synopsis',
+        'cover_image',
+    ];
 }

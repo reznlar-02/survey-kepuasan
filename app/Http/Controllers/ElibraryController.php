@@ -1,17 +1,17 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Elibrary;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class ElibraryController extends Controller
 {
     public function index()
-{
-    $books = Elibrary::paginate(10); // Mengambil data dari tabel `elibraries`
-    return view('elibrary.index', compact('books'));
-}
+    {
+        $books = Elibrary::paginate(10);
+        return view('elibrary.index', compact('books'));
+    }
 
     public function create()
     {
@@ -21,16 +21,17 @@ class ElibraryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'author' => 'required',
-            'category' => 'required',
-            'synopsis' => 'required',
+            'title' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
+            'synopsis' => 'required|string',
             'cover' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        $coverPath = null;
+        $coverImagePath = null;
         if ($request->hasFile('cover')) {
-            $coverPath = $request->file('cover')->store('covers', 'public');
+            $storedPath = $request->file('cover')->store('covers', 'public');
+            $coverImagePath = 'storage/' . $storedPath;
         }
 
         Elibrary::create([
@@ -38,14 +39,15 @@ class ElibraryController extends Controller
             'author' => $request->author,
             'category' => $request->category,
             'synopsis' => $request->synopsis,
-            'cover' => $coverPath,
+            'cover_image' => $coverImagePath,
         ]);
 
         return redirect()->route('elibrary.index')->with('success', 'Book added successfully!');
     }
+
     public function search(Request $request)
     {
-        // Your search logic here
-        return view('elibrary.search'); // Return the appropriate view
+        // Implementasikan logika pencarian sesuai kebutuhan
+        return view('elibrary.index', ['books' => Elibrary::paginate(10)]);
     }
 }

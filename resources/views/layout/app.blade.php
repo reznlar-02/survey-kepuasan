@@ -24,7 +24,7 @@
                     <a class="nav-link fw-bold menu-item" aria-current="page" href="{{ route('landing') }}">Home</a>
                     <a class="nav-link fw-bold menu-item" href="{{ route('struktur_organisasi') }}">Struktur Organisasi</a>
                     <a class="nav-link fw-bold menu-item" href="{{ route('questioner.form') }}">Questioner</a>
-                    <a class="nav-link fw-bold menu-item" href="/elibrary">E-Library</a>
+                    <a class="nav-link fw-bold menu-item" href="{{ route('elibrary.index') }}">E-Library</a>
                     <a class="nav-link fw-bold active menu-item" href="{{ route('pengumuman.index') }}">Pengumuman</a>
                     <div>
                         <a class="nav-link menu-item" href="/admin/login">Admin</a>

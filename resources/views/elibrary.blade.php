@@ -92,8 +92,8 @@
                     <a class="nav-link menu-item" href="{{ route('landing') }}">Home</a>
                     <a class="nav-link menu-item" href="{{ route('struktur_organisasi') }}">Struktur Organisasi</a>
                     <a class="nav-link menu-item" href="/questioner">Questioner</a>
-                    <a class="nav-link menu-item active" href="elibrary">E-Library</a>
-                    <a class="nav-link menu-item" href="{{ route('pengumuman') }}">Pengumuman</a>
+                    <a class="nav-link menu-item active" href="{{ route('elibrary.index') }}">E-Library</a>
+                    <a class="nav-link menu-item" href="{{ route('pengumuman.index') }}">Pengumuman</a>
                     <div> <a class="nav-link menu-item" href="/admin/login">Admin</a>
                 </div>
             </div>

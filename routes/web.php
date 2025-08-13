@@ -8,11 +8,20 @@ use App\Http\Controllers\KunjunganController;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\QuestionerController;
 use App\Http\Controllers\SurveyKepuasanController; // Pastikan controller ini sudah diimport
+use App\Http\Controllers\ElibraryController;
 
 // Static Pages
 Route::view('/', 'landing')->name('landing');
 Route::view('/home', 'home')->name('home');
 Route::view('/struktur-organisasi', 'struktur_organisasi')->name('struktur_organisasi');
+
+// E-Library Routes
+Route::prefix('elibrary')->name('elibrary.')->group(function () {
+    Route::get('/', [ElibraryController::class, 'index'])->name('index');
+    Route::get('/create', [ElibraryController::class, 'create'])->name('create');
+    Route::post('/', [ElibraryController::class, 'store'])->name('store');
+    Route::get('/search', [ElibraryController::class, 'search'])->name('search');
+});
 
 // Questioner Routes
 Route::prefix('questioner')->group(function () {
@@ -41,50 +50,12 @@ Route::prefix('pengumuman')->group(function () {
 
 // Admin Authentication Routes
 Route::prefix('admin')->group(function () {
-    // Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
-    // Route::post('/login', [AdminAuthController::class, 'login'])->name('admin.login.submit'); // Pastikan ini memanggil login()
-    // Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
-
     Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('showLoginForm');
-    Route::post('/login', [AdminAuthController::class, 'login'])->name('login'); // Pastikan ini memanggil login()
-   
-
- // Login Routes
-//     Route::prefix('/admin')->group(function () {
-//         Route::get('/login', [LoginController::class, 'showLoginForm'])->name('admin.login');
-//         Route::post('/login', [LoginController::class, 'login'])->name('admin.login.submit');
-//         Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
-
-    // Route::middleware('auth:admin')->group(function () {
-    //     Route::get('/dashboard', [AdminAuthController::class, 'dashboard'])
-    //     ->name('admin.dashboard');
+    Route::post('/login', [AdminAuthController::class, 'login'])->name('login');
 
     Route::middleware('auth::admin')->group(function () {
         Route::get('/dashboard', [AdminAuthController::class, 'dashboard'])->name('dashboard');
         Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
     });
- });
-
-// Route::controller(LoginController::class)->group(function (){
-//     Route::get('login', 'showLoginForm')->name('admin.login');
-//     Route::post('login', 'login')->name('admin.login.submit');
-// });
-
-// Route::middleware('auth')->group(function () {
-//     Route::get('dashboard', function () {
-//         return view('admin.dashboard');
-//     })->name('admin.dashboard');
-// });
-
-
-
-// Route::get('/admin', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
-// Route::get('/admin', [AdminAuthController::class, 'login'])->name('admin.login.submit');
-// Route::get('/admin', [AdminAuthController::class, 'logout'])->name('admin.logout');
-
-
-// Redirect /admin ke dashboard admin
-// Route::get('/admin', function () {
-//     return redirect()->route('admin.dashboard');
-// })->middleware('auth:admin')->name('admin.index');
+});
 

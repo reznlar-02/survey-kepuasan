@@ -116,9 +116,9 @@
 
         <div class="links">
             <a href="{{ route('struktur_organisasi') }}">Struktur Organisasi</a>
-            <a href="{{ route('questioner') }}">Isi Survey</a>
-            <a href="{{ route('e_library') }}">Kunjungi E-Library</a>
-            <a href="{{ route('pengumuman') }}">Lihat Pengumuman</a>
+            <a href="{{ route('questioner.form') }}">Isi Survey</a>
+            <a href="{{ route('elibrary.index') }}">Kunjungi E-Library</a>
+            <a href="{{ route('pengumuman.index') }}">Lihat Pengumuman</a>
         </div>
     </section>
 </body>
